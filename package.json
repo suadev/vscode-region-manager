@@ -1,0 +1,49 @@
+{
+  "name": "sample-vscode-ext",
+  "displayName": "sample_vscode_ext",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "suadev",
+  "engines": {
+    "vscode": "^1.20.0"
+  },
+  "categories": ["Other"],
+  "main": "./out/extension",
+  "activationEvents": [
+    "onCommand:extension.moveIntoRegion",
+    "onCommand:extension.removeAllRegions"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.moveIntoRegion",
+        "title": "Move into #region"
+      },
+      {
+        "command": "extension.removeAllRegions",
+        "title": "Remove all #regions"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.moveIntoRegion",
+        "key": "ctrl+r ctrl+e",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "tslint": "^5.8.0",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  }
+}
