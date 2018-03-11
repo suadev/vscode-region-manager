@@ -1,11 +1,19 @@
 {
-  "name": "sample-vscode-ext",
-  "displayName": "sample_vscode_ext",
-  "description": "",
-  "version": "0.0.1",
+  "name": "csharp-region-manager",
+  "displayName":
+    "A simple vs code extension that helps to create/delete #regions quickly",
+  "description":
+    "A simple vs code extension that helps to create/delete #regions quickly",
+  "version": "1.0.1",
+  "icon": "icon.png",
   "publisher": "suadev",
   "engines": {
     "vscode": "^1.20.0"
+  },
+  "homepage": "https://github.com/suadev/csharp-region-manager.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suadev/csharp-region-manager.git"
   },
   "categories": ["Other"],
   "main": "./out/extension",
