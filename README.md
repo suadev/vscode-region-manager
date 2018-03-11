@@ -1,5 +1,9 @@
 A simple vs code extension that helps to create/delete #regions quickly. (Enve if i don't recommend to use #regions)
 
+Download from visual studio marketplace;
+
+https://marketplace.visualstudio.com/items?itemName=suadev.csharp-region-manager
+
 ## Features
 
 * Select some piece of code and use (ctrl+r, ctrl+e), type your region name and press enter.
