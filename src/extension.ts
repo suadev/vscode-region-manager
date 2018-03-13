@@ -47,6 +47,11 @@ export function activate(context: ExtensionContext) {
         return;
       }
 
+      // commands.executeCommand("editor.action.replaceAll", [
+      //   "#region",
+      //   ""
+      // ]);
+
       //todo
       //   let filtered = editor.document
       //     .getText()
@@ -67,12 +72,12 @@ function InsertRegion(uri: Uri, selection: Selection, regionName: string) {
 
 function RemoveRegion(editor: TextEditor, selection: Selection, uri: Uri) {
   let removeWs = new WorkspaceEdit();
+  //region start
   removeWs.delete(uri, editor.document.lineAt(selection.start).range);
 
-  let endRegionLine = editor.document
-    .getText()
-    .indexOf("#endregion", selection.active.character);
-
+  //region end
+  let offset = editor.document.offsetAt(selection.active);
+  let endRegionLine = editor.document.getText().indexOf("#endregion", offset);
   removeWs.replace(
     uri,
     new Range(
