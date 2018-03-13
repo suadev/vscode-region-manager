@@ -22,8 +22,8 @@ export function activate(context: ExtensionContext) {
 
       let selection = editor.selection;
       let uri = editor.document.uri;
-
       var cursorLineText = editor.document.lineAt(selection.start);
+
       if (cursorLineText.text.indexOf("#region") > -1) {
         return RemoveRegion(editor, selection, uri);
       }
@@ -34,9 +34,10 @@ export function activate(context: ExtensionContext) {
       }
 
       InsertRegion(uri, selection, regionName);
+      commands.executeCommand("editor.foldAllMarkerRegions");
+      commands.executeCommand("workbench.action.files.save");
     }
   );
-  context.subscriptions.push(moveIntoRegionCommand);
 
   let removeAllRegionsCommand = commands.registerCommand(
     "extension.removeAllRegions",
@@ -46,11 +47,14 @@ export function activate(context: ExtensionContext) {
         return;
       }
 
-      // let filtered = editor.document
-      //   .getText()
-      //   .replace("^[ \t]*#[ \t]*(region|endregion).*\n", "x");
+      //todo
+      //   let filtered = editor.document
+      //     .getText()
+      //     .replace("^[ \t]*#[ \t]*(region|endregion).*\n", "");
     }
   );
+
+  context.subscriptions.push(moveIntoRegionCommand);
   context.subscriptions.push(removeAllRegionsCommand);
 }
 
@@ -87,8 +91,3 @@ function getRegionName() {
     value: "newregion"
   });
 }
-
-// function isValidLanguage(languageId) {
-//   if (config == undefined || !(config.languageIds instanceof Array) || config.languageIds.length === 0) return true;
-//   return config.languageIds.find(id => id.toLowerCase() === languageId.toLowerCase()) != undefined;
-// }
