@@ -4,7 +4,7 @@
     "A simple vs code extension that helps to create/delete #regions quickly",
   "description":
     "A simple vs code extension that helps to create/delete #regions quickly",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "icon.png",
   "publisher": "suadev",
   "engines": {
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/suadev/csharp-region-manager.git"
   },
-  "categories": ["Other"],
+  "categories": ["Formatters", "Other"],
   "main": "./out/extension",
   "activationEvents": [
     "onCommand:extension.moveIntoRegion",
