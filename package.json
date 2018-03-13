@@ -4,7 +4,7 @@
     "A simple vs code extension that helps to create/delete #regions quickly",
   "description":
     "A simple vs code extension that helps to create/delete #regions quickly",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icon": "icon.png",
   "publisher": "suadev",
   "engines": {
