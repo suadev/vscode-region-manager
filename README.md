@@ -19,5 +19,5 @@ https://marketplace.visualstudio.com/items?itemName=suadev.csharp-region-manager
 ## Todo list
 
 * <strike>Collapse and beautify the region after created it</strike>
-* <strile>Add "Remove all #regions" feature</strike>
+* <strike>Add "Remove all #regions" feature</strike>
 * Remove also empty lines after removing '#region' and '#endregion' lines.
