@@ -46,16 +46,22 @@ export function activate(context: ExtensionContext) {
       if (!editor) {
         return;
       }
+      let document = editor.document;
+      let allText = document.getText();
 
-      // commands.executeCommand("editor.action.replaceAll", [
-      //   "#region",
-      //   ""
-      // ]);
+      let cleanedText = allText.replace(
+        new RegExp(/#(region|endregion).*/, "g"),
+        ""
+      );
 
-      //todo
-      //   let filtered = editor.document
-      //     .getText()
-      //     .replace("^[ \t]*#[ \t]*(region|endregion).*\n", "");
+      const fullRange = new Range(
+        document.positionAt(0),
+        document.positionAt(allText.length - 1)
+      );
+
+      let editWs = new WorkspaceEdit();
+      editWs.replace(document.uri, fullRange, cleanedText);
+      workspace.applyEdit(editWs);
     }
   );
 
