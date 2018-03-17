@@ -2,8 +2,8 @@
   "name": "csharp-region-manager",
   "displayName": "Create / Delete #region quickly",
   "description":
-    "A simple vs code extension that helps to create/delete #regions quickly",
-  "version": "1.0.6",
+    "A simple vs code extension that helps to create/delete #region quickly",
+  "version": "1.0.7",
   "icon": "icon.png",
   "publisher": "suadev",
   "engines": {
