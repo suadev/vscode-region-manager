@@ -12,6 +12,12 @@ A simple vs code extension that helps to create/delete #regions quickly.
 * To remove all #regions in the active document, press F1 and type "Remove all #regions" and press enter.
 
 <img src= "https://raw.githubusercontent.com/suadev/csharp-region-manager/master/screencast.gif" />
+
+## Configuration
+
+* `csharp-region-manager.nameOnEndRegion`: Adds the region name to the `#endregion` tag as well (defaults to **false**)
+
+* `csharp-region-manager.innerSpacing`: Adds an empty line after the `#region` and before the `#endregion` tags (defaults to **true**)
   
 ## Todo list
 

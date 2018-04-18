@@ -1,56 +1,74 @@
 {
-  "name": "csharp-region-manager",
-  "displayName": "Create / Delete #region quickly",
-  "description":
-    "A simple vs code extension that helps to create/delete #region quickly",
-  "version": "1.0.7",
-  "icon": "icon.png",
-  "publisher": "suadev",
-  "engines": {
-    "vscode": "^1.20.0"
-  },
-  "homepage": "https://github.com/suadev/csharp-region-manager.git",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/suadev/csharp-region-manager.git"
-  },
-  "categories": ["Formatters", "Other", "Keymaps"],
-  "main": "./out/extension",
-  "activationEvents": [
-    "onCommand:extension.moveIntoRegion",
-    "onCommand:extension.removeAllRegions"
-  ],
-  "contributes": {
-    "commands": [
-      {
-        "command": "extension.moveIntoRegion",
-        "title": "Move into #region"
-      },
-      {
-        "command": "extension.removeAllRegions",
-        "title": "Remove all #regions"
-      }
+    "name": "csharp-region-manager",
+    "displayName": "Create / Delete #region quickly",
+    "description": "A simple vs code extension that helps to create/delete #region quickly",
+    "version": "1.0.7",
+    "icon": "icon.png",
+    "publisher": "suadev",
+    "engines": {
+        "vscode": "^1.20.0"
+    },
+    "homepage": "https://github.com/suadev/csharp-region-manager.git",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/suadev/csharp-region-manager.git"
+    },
+    "categories": [
+        "Formatters",
+        "Other",
+        "Keymaps"
     ],
-    "keybindings": [
-      {
-        "command": "extension.moveIntoRegion",
-        "key": "ctrl+r ctrl+e",
-        "when": "editorTextFocus"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test"
-  },
-  "devDependencies": {
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.6",
-    "tslint": "^5.8.0",
-    "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
-  }
+    "main": "./out/extension",
+    "activationEvents": [
+        "onCommand:extension.moveIntoRegion",
+        "onCommand:extension.removeAllRegions"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.moveIntoRegion",
+                "title": "Move into #region"
+            },
+            {
+                "command": "extension.removeAllRegions",
+                "title": "Remove all #regions"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.moveIntoRegion",
+                "key": "ctrl+r ctrl+e",
+                "when": "editorTextFocus"
+            }
+        ],
+        "configuration": {
+            "title": "Create / Delete #region quickly",
+            "properties": {
+                "csharp-region-manager.nameOnEndRegion": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Include the name on the #endregion"
+                },
+                "csharp-region-manager.innerSpacing": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Add empty line after #region and before #endregion"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
 }
