@@ -8,7 +8,8 @@ import {
     Range,
     TextEditor,
     Selection,
-    Uri
+    Uri,
+    Position
 } from "vscode";
 
 export function activate(context: ExtensionContext) {
@@ -55,6 +56,7 @@ function registerMoveIntoRegion() {
         let selection = editor.selection;
         let uri = editor.document.uri;
         var cursorLineText = editor.document.lineAt(selection.start);
+
         if (cursorLineText.text.indexOf("#region") > -1) {
             return RemoveRegion(editor, selection, uri);
         }
@@ -75,9 +77,7 @@ function InsertRegion(uri: Uri, selection: Selection, regionName: string) {
     const innerSpacing: string | undefined = workspace.getConfiguration(extensionPrefix).get(configurationSettings.innerSpacing);
 
     editWs.insert(uri, selection.start, innerSpacing ? "#region " + regionName + " \n\n" : "#region " + regionName + " \n");
-
     let endRegionText: string = nameOnEndRegion ? `#endregion ${regionName}` : '#endregion';
-
     editWs.insert(uri, selection.end, innerSpacing ? "\n\n" + endRegionText : "\n" + endRegionText);
     workspace.applyEdit(editWs);
 }
@@ -89,16 +89,17 @@ function RemoveRegion(editor: TextEditor, selection: Selection, uri: Uri) {
         uri,
         editor.document.lineAt(selection.start).rangeIncludingLineBreak
     );
-    // removeWs.replace(uri, new Range(selection.start, selection.start), "");
 
     //region end
     let offset = editor.document.offsetAt(selection.active);
-    let endRegionLine = editor.document.getText().indexOf("#endregion", offset);
+    let endRegionStartPosition = editor.document.getText().indexOf("#endregion", offset);
+
+    let endRegionLine = editor.document.positionAt(endRegionStartPosition).line;
     removeWs.replace(
         uri,
         new Range(
-            editor.document.positionAt(endRegionLine),
-            editor.document.positionAt(endRegionLine + 12)
+            new Position(endRegionLine, 0),
+            new Position(endRegionLine + 1, 0)
         ),
         ""
     );
