@@ -13,14 +13,8 @@ A simple vs code extension that helps to create/delete #regions quickly.
 
 <img src= "https://raw.githubusercontent.com/suadev/csharp-region-manager/master/screencast.gif" />
 
-## Configuration
+## Configuration ( v.1.0.8 and later )
 
 * `csharp-region-manager.nameOnEndRegion`: Adds the region name to the `#endregion` tag as well (defaults to **false**)
 
 * `csharp-region-manager.innerSpacing`: Adds an empty line after the `#region` and before the `#endregion` tags (defaults to **true**)
-  
-## Todo list
-
-* <strike>Collapse and beautify the region after created it</strike>
-* <strike>Add "Remove all #regions" feature</strike>
-* <strike>Remove also empty lines after removing '#region' and '#endregion' lines.</strike>
