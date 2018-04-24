@@ -21,7 +21,8 @@
     "main": "./out/extension",
     "activationEvents": [
         "onCommand:extension.moveIntoRegion",
-        "onCommand:extension.removeAllRegions"
+        "onCommand:extension.removeAllRegions",
+        "onCommand:extension.createAutoRegions"
     ],
     "contributes": {
         "commands": [
@@ -32,6 +33,10 @@
             {
                 "command": "extension.removeAllRegions",
                 "title": "Remove all #regions"
+            },
+            {
+                "command": "extension.createAutoRegions",
+                "title": "Create All Auto #regions"
             }
         ],
         "keybindings": [
@@ -53,6 +58,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Add empty line after #region and before #endregion"
+                },
+                "csharp-region-manager.createAutoRegionsEvenIfTheyAreEmpty": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Insert #regions event if they are empty"
                 }
             }
         }
