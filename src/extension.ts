@@ -9,12 +9,14 @@ import {
     TextEditor,
     Selection,
     Uri,
-    Position
+    Position,
+    SymbolInformation
 } from "vscode";
 
 export function activate(context: ExtensionContext) {
     context.subscriptions.push(registerMoveIntoRegion());
     context.subscriptions.push(registerRemoveAllRegions());
+    context.subscriptions.push(registerCreateAutoRegions());
 }
 
 const extensionPrefix: string = 'csharp-region-manager';
@@ -105,6 +107,78 @@ function RemoveRegion(editor: TextEditor, selection: Selection, uri: Uri) {
     );
     workspace.applyEdit(removeWs);
     commands.executeCommand("workbench.action.files.save");
+}
+
+function registerCreateAutoRegions() {
+    return commands.registerCommand("extension.createAutoRegions", async () => {
+
+
+        const { activeTextEditor } = window;
+
+        if (activeTextEditor && activeTextEditor.document.uri) {
+            let symbols: Array<SymbolInformation> | undefined = await commands.executeCommand<Array<SymbolInformation>>(
+                'vscode.executeDocumentSymbolProvider',
+                activeTextEditor.document.uri
+            );
+
+            if (symbols && symbols.length > 0) {
+                let filteredSymbols: Array<SymbolInformation>;
+
+                filteredSymbols = symbols.filter(symbol => {
+                    return symbol.kind >= 5 && symbol.kind <= 9;
+                });
+
+                let tabSize = 4; // need to get the actual tab size from settings
+                let pattern = new RegExp(` {${tabSize}}| {0,${tabSize - 1}}\t`, "g");
+                let blocks: Range[] = [];
+
+                filteredSymbols.forEach(symbol => {
+                    let startLineNumber: number = symbol.location.range.start.line;
+                    let endLineNumber: number;
+
+                    let text = activeTextEditor.document.lineAt(startLineNumber).text;
+                    let lineMatch = text.match(pattern);
+
+                    if (lineMatch && lineMatch.length > 0) {
+                        let lineIndent = lineMatch.length;
+                        switch (symbol.kind) {
+                            case 5: // method
+                                let nextLineNumber = startLineNumber + 2; // class opening brace should be on the next line, we can check for that later though
+                                let currentText = activeTextEditor.document.lineAt(nextLineNumber).text;
+                                let currentLineMatch = currentText.match(pattern);
+                                if (currentLineMatch && currentLineMatch.length > 0) {
+                                    let currentLineIndent = currentLineMatch.length;
+
+                                    while (currentLineIndent > lineIndent) {
+                                        nextLineNumber++;
+                                        currentText = activeTextEditor.document.lineAt(nextLineNumber).text;
+                                        currentLineMatch = currentText.match(pattern);
+                                        if (currentLineMatch && currentLineMatch.length > 0) {
+                                            currentLineIndent = currentLineMatch.length;
+                                        }
+                                    }
+
+                                    endLineNumber = nextLineNumber;
+                                    let blockRange: Range = new Range(startLineNumber, 0, endLineNumber, currentText.length);
+                                    blocks.push(blockRange);
+                                }
+                                break;
+                        }
+                    }
+
+                    if (blocks.length > 0) {
+                        blocks.forEach(block => {
+                            let textBlock = activeTextEditor.document.getText(block);
+                            console.log(textBlock);
+                        });
+                    }
+                });
+            }
+        }
+
+
+
+    });
 }
 
 function getRegionName() {
