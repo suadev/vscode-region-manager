@@ -1,9 +1,7 @@
 A simple vs code extension that helps to create/delete #regions quickly.
 (i don't recommend to use #region. It's actually an anti-pattern. <strong>Instead of using #region, refactor your class or method.</strong>)
 
-## Features
-
-Supported languages/frameworks;
+## Supported Languages / Frameworks
 
 * csharp, visualbasic
 * javascript, typescript 
