@@ -12,29 +12,49 @@ import {
     Position
 } from "vscode";
 
-export function activate(context: ExtensionContext) {
-    context.subscriptions.push(registerMoveIntoRegion());
-    context.subscriptions.push(registerRemoveAllRegions());
-}
-
 const extensionPrefix: string = 'csharp-region-manager';
+let regionStartKey: string = "#region";
+let regionEndKey: string = "#endregion";
+let regionRegex: RegExp = /#(region|endregion).*\r\n/;
+
 const enum configurationSettings {
     nameOnEndRegion = 'nameOnEndRegion',
     innerSpacing = 'innerSpacing'
 }
 
-function registerRemoveAllRegions() {
+export function activate(context: ExtensionContext) {
+
+    var editor = window.activeTextEditor;
+    if (!editor) {
+        return;
+    }
+    let langId = editor.document.languageId;
+
+    setLanguageSettings(langId); //defaults c#
+    context.subscriptions.push(registerMoveIntoRegion(editor));
+    context.subscriptions.push(registerRemoveAllRegions(editor));
+}
+
+function setLanguageSettings(langId: string) {
+    if (langId === "javascript" || langId === "javascriptreact" || langId === "typescript") {
+        regionStartKey = "//#region";
+        regionEndKey = "//#endregion";
+        regionRegex = /\/\/#(region|endregion).*\r\n/;
+    }
+    else if (langId === "vb") {
+        regionStartKey = "#Region";
+        regionEndKey = "#End Region";
+        regionRegex = /#(Region|End Region).*\r\n/;
+    }
+}
+
+function registerRemoveAllRegions(editor: TextEditor) {
     return commands.registerCommand("extension.removeAllRegions", () => {
-        var editor = window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
+
         let document = editor.document;
         let allText = document.getText();
-        let cleanedText = allText.replace(
-            new RegExp(/#(region|endregion).*\r\n/, "g"),
-            ""
-        );
+        let cleanedText = allText.replace(new RegExp(regionRegex, "g"), "");
+
         const fullRange = new Range(
             document.positionAt(0),
             document.positionAt(allText.length)
@@ -46,18 +66,14 @@ function registerRemoveAllRegions() {
     });
 }
 
-function registerMoveIntoRegion() {
+function registerMoveIntoRegion(editor: TextEditor) {
     return commands.registerCommand("extension.moveIntoRegion", async () => {
-        var editor = window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
 
         let selection = editor.selection;
         let uri = editor.document.uri;
         var cursorLineText = editor.document.lineAt(selection.start);
 
-        if (cursorLineText.text.indexOf("#region") > -1) {
+        if (cursorLineText.text.indexOf(regionStartKey) > -1) {
             return RemoveRegion(editor, selection, uri);
         }
         let regionName = await getRegionName();
@@ -76,8 +92,8 @@ function InsertRegion(uri: Uri, selection: Selection, regionName: string) {
     const nameOnEndRegion: string | undefined = workspace.getConfiguration(extensionPrefix).get(configurationSettings.nameOnEndRegion);
     const innerSpacing: string | undefined = workspace.getConfiguration(extensionPrefix).get(configurationSettings.innerSpacing);
 
-    editWs.insert(uri, selection.start, innerSpacing ? "#region " + regionName + " \n\n" : "#region " + regionName + " \n");
-    let endRegionText: string = nameOnEndRegion ? `#endregion ${regionName}` : '#endregion';
+    editWs.insert(uri, selection.start, innerSpacing ? regionStartKey + " " + regionName + " \n\n" : regionStartKey + " " + regionName + " \n");
+    let endRegionText: string = nameOnEndRegion ? `${regionEndKey} ${regionName}` : regionEndKey;
     editWs.insert(uri, selection.end, innerSpacing ? "\n\n" + endRegionText : "\n" + endRegionText);
     workspace.applyEdit(editWs);
 }
@@ -92,7 +108,7 @@ function RemoveRegion(editor: TextEditor, selection: Selection, uri: Uri) {
 
     //region end
     let offset = editor.document.offsetAt(selection.active);
-    let endRegionStartPosition = editor.document.getText().indexOf("#endregion", offset);
+    let endRegionStartPosition = editor.document.getText().indexOf(regionEndKey, offset);
 
     let endRegionLine = editor.document.positionAt(endRegionStartPosition).line;
     removeWs.replace(

@@ -3,6 +3,14 @@ A simple vs code extension that helps to create/delete #regions quickly.
 
 ## Features
 
+Supported languages/frameworks;
+
+* csharp, visualbasic
+* javascript, typescript 
+* react and angular applications which is created by using typescript or script (supporting ts, .tsx, .jsx files)
+
+## Features
+
 * Select some piece of code and use (ctrl+r, ctrl+e), type your region name and press enter.
 
 * Or select some piece of code, press F1 and type "Move into #region".
@@ -18,3 +26,14 @@ A simple vs code extension that helps to create/delete #regions quickly.
 * `csharp-region-manager.nameOnEndRegion`: Adds the region name to the `#endregion` tag as well (defaults to **false**)
 
 * `csharp-region-manager.innerSpacing`: Adds an empty line after the `#region` and before the `#endregion` tags (defaults to **true**)
+
+
+## Release Notes
+
+### 1.0.9
+
+In addition to c#,  js, ts and vb support was added.
+
+### 1.0.8
+
+Added 'csharp-region-manager.nameOnEndRegion' and 'csharp-region-manager.innerSpacing' config parameters
