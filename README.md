@@ -15,7 +15,7 @@ A simple vs code extension that helps to create/delete #regions quickly.
 
 * Or select some piece of code, press F1 and type "Move into #region".
 
-* To remove region, click the line that contains '#region' and use (ctrl+r, ctrl+e).
+* To remove a single #region, click the line that contains '#region' keyword and use (ctrl+r, ctrl+e).
 
 * To remove all #regions in the active document, press F1 and type "Remove all #regions" and press enter. See the screencast below.
 
