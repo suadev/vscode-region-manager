@@ -21,16 +21,20 @@ A simple vs code extension that helps to create/delete #regions quickly.
 
 ## Configuration ( v.1.0.8 and later )
 
-* `csharp-region-manager.nameOnEndRegion`: Adds the region name to the `#endregion` tag as well (defaults to **false**)
+* `vscode-region-manager.nameOnEndRegion`: Adds the region name to the `#endregion` tag as well (defaults to **false**)
 
-* `csharp-region-manager.innerSpacing`: Adds an empty line after the `#region` and before the `#endregion` tags (defaults to **true**)
+* `vscode-region-manager.innerSpacing`: Adds an empty line after the `#region` and before the `#endregion` tags (defaults to **true**)
 
 <strong>c# use case</strong>;
 
-<img src= "https://raw.githubusercontent.com/suadev/csharp-region-manager/master/screencast.gif" />
+<img src= "https://raw.githubusercontent.com/suadev/vscode-region-manager/master/screencast.gif" />
 
 
 ## Release Notes
+
+### 1.0.10
+
+Extension renamed to 'vscode-region-manager'
 
 ### 1.0.9
 
@@ -38,4 +42,4 @@ In addition to c#,  js, ts and vb support was added.
 
 ### 1.0.8
 
-Added 'csharp-region-manager.nameOnEndRegion' and 'csharp-region-manager.innerSpacing' config parameters
+Added 'vscode-region-manager.nameOnEndRegion' and 'vscode-region-manager.innerSpacing' config parameters

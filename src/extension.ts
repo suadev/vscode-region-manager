@@ -12,7 +12,7 @@ import {
     Position
 } from "vscode";
 
-const extensionPrefix: string = 'csharp-region-manager';
+const extensionPrefix: string = 'vscode-region-manager';
 let regionStartKey: string = "#region";
 let regionEndKey: string = "#endregion";
 let regionRegex: RegExp = /#(region|endregion).*\r\n/;

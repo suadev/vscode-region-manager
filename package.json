@@ -1,17 +1,17 @@
 {
-    "name": "csharp-region-manager",
+    "name": "vscode-region-manager",
     "displayName": "Create / Delete #region quickly",
     "description": "A simple vs code extension that helps to create/delete #region quickly",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "icon": "icon.png",
     "publisher": "suadev",
     "engines": {
         "vscode": "^1.20.0"
     },
-    "homepage": "https://github.com/suadev/csharp-region-manager.git",
+    "homepage": "https://github.com/suadev/vscode-region-manager.git",
     "repository": {
         "type": "git",
-        "url": "https://github.com/suadev/csharp-region-manager.git"
+        "url": "https://github.com/suadev/vscode-region-manager.git"
     },
     "categories": [
         "Formatters",
@@ -44,12 +44,12 @@
         "configuration": {
             "title": "Create / Delete #region quickly",
             "properties": {
-                "csharp-region-manager.nameOnEndRegion": {
+                "vscode-region-manager.nameOnEndRegion": {
                     "type": "boolean",
                     "default": false,
                     "description": "Include the name on the #endregion"
                 },
-                "csharp-region-manager.innerSpacing": {
+                "vscode-region-manager.innerSpacing": {
                     "type": "boolean",
                     "default": true,
                     "description": "Add empty line after #region and before #endregion"
