@@ -32,6 +32,11 @@ A simple vs code extension that helps to create/delete #regions quickly.
 
 ## Release Notes
 
+### 1.0.11
+
+Added unsupported file error message.
+Some minor hotfix
+
 ### 1.0.10
 
 Extension renamed to 'vscode-region-manager'
@@ -42,4 +47,4 @@ In addition to c#,  js, ts and vb support was added.
 
 ### 1.0.8
 
-Added 'vscode-region-manager.nameOnEndRegion' and 'vscode-region-manager.innerSpacing' config parameters
+Added 'vscode-region-manager.nameOnEndRegion' and 'vscode-region-manager.innerSpacing' config parameters.
