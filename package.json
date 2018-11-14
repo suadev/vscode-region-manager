@@ -6,7 +6,7 @@
     "icon": "icon.png",
     "publisher": "suadev",
     "engines": {
-        "vscode": "^1.20.0"
+        "vscode": "^1.29.0"
     },
     "homepage": "https://github.com/suadev/vscode-region-manager.git",
     "repository": {
@@ -65,10 +65,10 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^8.10.37",
         "tslint": "^5.8.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.21"
     }
 }
