@@ -32,7 +32,7 @@ export function activate(context: ExtensionContext) {
 }
 
 function setLanguageSettings(langId: string) {
-  if (langId === "csharp") {
+  if (langId === "csharp" || langId === "ruby") {
     regionStartKey = "#region";
     regionEndKey = "#endregion";
     regionRegex = /#(region|endregion).*\r\n/;
